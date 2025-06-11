@@ -37,7 +37,7 @@ const FormSignIn = () => {
 
         if (!validation.success) {
             const errorMessage = validation.error.issues.map((issues) => issues.message)
-            setError(errorMessage)
+            setError(errorMessage);
             return;
         }
 
@@ -46,7 +46,7 @@ const FormSignIn = () => {
             setCookie('accessToken', response.data.access_token)
             router.push('/dashboard')
           }).catch((error) => {
-            setError(['Login failed. Invalid email or password'])
+            setError(['Login failed. Invalid email or password']);
             return;
           })
     }
