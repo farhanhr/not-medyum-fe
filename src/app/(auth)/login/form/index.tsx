@@ -3,10 +3,42 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation"
 import React, { useState } from "react";
+import { useFormStatus } from "react-dom";
+import { formSchema } from "./validation";
+
+const SubmitButton = () => {
+    const {pending} = useFormStatus()
+
+    return (
+        <Button
+          disabled={pending} className="w-full" type="submit">
+            {pending ? 'Loading...' : 'Submit'}
+          </Button>
+    )
+}
 
 const FormSignIn = () => {
     const router = useRouter();
 
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [error, setError] = useState<string[]>([]);
+
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError([]);
+
+        const validation = formSchema.safeParse({
+            email,
+            password
+        })
+
+        if (!validation.success) {
+            const errorMessage = validation.error.issues.map((issues) => issues.message)
+            setError(errorMessage)
+            return;
+        }
+    }
     return (
         <div className="w-full h-screen">
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-96">
