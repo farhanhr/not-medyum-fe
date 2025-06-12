@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${inter.variable} antialiased`}>
+            <body className={inter.className}>
                 <section>
                     <nav className="border-b border-muted p-5">
                         <div className="flex flex-row items-center justify-between">
@@ -47,7 +47,7 @@ export default function RootLayout({
                             <Button variant={"ghost"} asChild className="w-full justify-start">
                                 <Link href={""}>
                                     <Layers3 className="mr-2 w-4 h4" />
-                                    category
+                                    Category
                                 </Link>
                             </Button>
                             <Button variant={"ghost"} asChild className="w-full justify-start">
