@@ -3,6 +3,8 @@ import "../globals.css";
 import { Inter } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { BookOpen, Layers3, User } from "lucide-react";
+import ButtonLogout from "./(home)/components/button-logout";
 
 const inter = Inter({
     variable: "--font-inter",
@@ -38,6 +40,30 @@ export default function RootLayout({
                                 <Link href={"/dasboard"}>Dashboard</Link>
                             </Button>
                         </div>
+                        <div className="space-y-2">
+                            <div className="uppercase text-xs font-bold">
+                                Master Data
+                            </div>
+                            <Button variant={"ghost"} asChild className="w-full justify-start">
+                                <Link href={""}>
+                                    <Layers3 className="mr-2 w-4 h4" />
+                                    category
+                                </Link>
+                            </Button>
+                            <Button variant={"ghost"} asChild className="w-full justify-start">
+                                <Link href={""}>
+                                    <BookOpen className="mr-2 w-4 h4" />
+                                    Content
+                                </Link>
+                            </Button>
+                            <Button variant={"ghost"} asChild className="w-full justify-start">
+                                <Link href={""}>
+                                    <User className="mr-2 w-4 h4" />
+                                    User
+                                </Link>
+                            </Button>
+                        </div>
+                        <ButtonLogout />
                     </section>
                     <section className="grow mr-5 mt-5 h-[87vh] overflow-y-auto">
                         {children}
