@@ -22,7 +22,6 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
             <body className={inter.className}>
                 <section>
                     <nav className="border-b border-muted p-5">
@@ -45,7 +44,7 @@ export default function RootLayout({
                                 Master Data
                             </div>
                             <Button variant={"ghost"} asChild className="w-full justify-start">
-                                <Link href={""}>
+                                <Link href={"dashboard/category"}>
                                     <Layers3 className="mr-2 w-4 h4" />
                                     Category
                                 </Link>
@@ -70,6 +69,5 @@ export default function RootLayout({
                     </section>
                 </section>
                 </body>
-        </html>
     );
 }
