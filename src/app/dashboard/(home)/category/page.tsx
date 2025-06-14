@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Category } from "@/model/Category";
 import { ApiResponse } from "@/model/ApiResponse";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { columns } from "./components/columns-table";
 
 export default function CategoryPage() {
     setupInterceptor();
@@ -52,13 +53,13 @@ export default function CategoryPage() {
             Category 
             </div>
             <Button asChild>
-                <Link rel="stylesheet" href="dashboard/category/create" >
+                <Link rel="stylesheet" href={"/dashboard/category/create"} >
                     <Plus className="mr-2 h-4 w-4" />
                     Create Data
                 </Link>
             </Button>
         </div>
-        <DataTable columns={[]} data={[]} />
+        <DataTable columns={columns} data={categories} />
         </>
     )
 }
