@@ -17,3 +17,12 @@ export const editCategory = async(categoryData: any, categoryID: number) => {
         throw error;
     }
 }
+
+export const deleteCategory = async(categoryID: number) => {
+    try {
+        const response = await axiosInstance.delete(`/admin/categories/${categoryID}`);
+        return response.data
+    } catch(error) {
+        throw error;
+    }
+}
