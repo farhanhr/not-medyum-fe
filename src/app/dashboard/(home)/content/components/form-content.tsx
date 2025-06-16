@@ -14,6 +14,7 @@ import { Category } from "@/model/Category";
 import SubmitButtonForm from "./submit-button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { uploadImage } from "../lib/action";
 
 interface FormContentProps {
     type?: "ADD"| "EDIT"
@@ -36,6 +37,7 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
     const [image, setImage] = useState<File | null>(null);
     const [previewImage, setPreviewImage] = useState(defaultValues ? defaultValues.image : '');
     const [error, setError] = useState<string[]>([]);
+    const [isUploading, setIsUploading] = useState(false);
 
     const statusList = [
         {value: 'PUBLISH', label: 'Publish'},
@@ -83,6 +85,19 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
                 return;
             }
             if (type == "ADD") {
+                if (!image) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Image required",
+                        toast: true,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return;
+                }
+                setIsUploading(true);
+                const imageUrl = await uploadImage(image);
                 // await createContent({title: title})
     
                 Swal.fire({
@@ -183,7 +198,7 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
                 <Label htmlFor="tags">
                     Tags
                 </Label>
-                <Input placeholder="tags1, tags2, tags3..." name="tags" id="tags" value={title} onChange={(e) => setTags(e.target.value)} required />
+                <Input placeholder="tags1, tags2, tags3..." name="tags" id="tags" value={tags} onChange={(e) => setTags(e.target.value)} required />
                 </div>
             </div>
             <div className="grid grid-cols-1 gap-4">
