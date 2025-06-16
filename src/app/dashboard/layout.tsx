@@ -33,7 +33,7 @@ export default function RootLayout({
                     </nav>
                 </section>
                 <section className="flex flex-row gap-5 item-start flex-nowrap">
-                    <section className="grow-0 w-[20%] h-screen shadow p-5 space-y-5">
+                    <section className="grow-0 md:w-[15%] w-[20%] h-screen shadow p-5 space-y-5">
                         <div className="space-y-2">
                             <Button variant={"ghost"} asChild className="w-full justify-start">
                                 <Link href={"/dasboard"}>Dashboard</Link>
@@ -50,7 +50,7 @@ export default function RootLayout({
                                 </Link>
                             </Button>
                             <Button variant={"ghost"} asChild className="w-full justify-start">
-                                <Link href={""}>
+                                <Link href={"/dashboard/content"}>
                                     <BookOpen className="mr-2 w-4 h4" />
                                     Content
                                 </Link>
