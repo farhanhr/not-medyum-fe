@@ -14,7 +14,7 @@ import { Category } from "@/model/Category";
 import SubmitButtonForm from "./submit-button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { uploadImage } from "../lib/action";
+import { createContent, uploadImage } from "../lib/action";
 
 interface FormContentProps {
     type?: "ADD"| "EDIT"
@@ -98,7 +98,15 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
                 }
                 setIsUploading(true);
                 const imageUrl = await uploadImage(image);
-                // await createContent({title: title})
+                await createContent({
+                    title: title,
+                    excerpt: excerpt,
+                    description: description,
+                    image: imageUrl.data ? imageUrl.data.urlImage : imageUrl,
+                    category_id: Number(categoryId),
+                    tags: tags,
+                    status: status,
+                });
     
                 Swal.fire({
                     icon: "success",
@@ -110,30 +118,18 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
                   });
     
                   router.push("/dashboard/content");
+            } 
+
+            let imageUrl;
+            if (!image) {
+                imageUrl = previewImage;
             } else {
-                if (defaultValues?.id) {
-                    // await editContent({title: title}, defaultValues.id);
+                setIsUploading(true);
+                imageUrl = await uploadImage(image);
+            }
 
-                    Swal.fire({
-                        icon: "success",
-                        title: "Succes",
-                        text: "Content has been edited",
-                        toast: true,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+            if (defaultValues?.id) {
 
-                    router.push("/dashboard/content");
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Content id is not found",
-                        toast: true,
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                }
             }
         } catch (error: any) {
             Swal.fire({
@@ -146,6 +142,8 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
             });
 
             setError(error instanceof Error? [error.message] : ['An unexpected error occured'])
+        } finally {
+            setIsUploading(false);
         }
     }
 
@@ -206,7 +204,7 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
                     <Label htmlFor="description">
                         Description
                     </Label>
-                    <Textarea placeholder="Description..." name="description" id="description" value={excerpt} onChange={(e) => setDescription(e.target.value)} required />
+                    <Textarea placeholder="Description..." name="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-4">

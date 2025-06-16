@@ -1,3 +1,4 @@
+import { ContentRequest } from "@/model/Content";
 import axiosInstance from "../../../../../../lib/axios";
 
 export const uploadImage = async (fileUpload: File) => {
@@ -11,6 +12,16 @@ export const uploadImage = async (fileUpload: File) => {
         });
         
         return response.data;
+    } catch (error: any) {
+        throw error;
+    }
+}
+
+export const createContent = async (contentData: ContentRequest) => {
+    try {
+        const response = await axiosInstance.post('admin/contents', contentData);
+
+        return response.data
     } catch (error: any) {
         throw error;
     }
