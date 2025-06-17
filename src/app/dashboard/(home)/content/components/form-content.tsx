@@ -254,7 +254,7 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
                     <Label htmlFor="image">
                         Upload Image
                     </Label>
-                    <Input name="image" type="file" id="image" accept="image/*" onChange={handleImageChange} required />
+                    <Input name="image" type="file" id="image" accept="image/*" onChange={handleImageChange} required={type == "ADD"} />
                 </div>
                 <div className="space-y-2">
                     <Label htmlFor="status">

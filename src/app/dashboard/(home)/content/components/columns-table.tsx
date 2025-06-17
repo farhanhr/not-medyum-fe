@@ -5,6 +5,7 @@ import { Content } from "@/model/Content";
 import { ColumnDef } from "@tanstack/react-table"
 import { Pencil } from "lucide-react";
 import Link from "next/link";
+import DeleteContent from "./delete-content";
 
 export const columns: ColumnDef<Content>[] = [
     {
@@ -60,6 +61,7 @@ export const columns: ColumnDef<Content>[] = [
                         Edit
                         </Link>
                     </Button>
+                    <DeleteContent id={content.id} />
                 </div>
             )
         }
