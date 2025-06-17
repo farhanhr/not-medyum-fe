@@ -14,7 +14,7 @@ const CreateContentPage = () => {
                 const response = await axiosInstance.get<ApiResponse<Category[]>>("admin/categories");
                 setCategories(response.data.data);
             } catch (error) {
-                alert("Error");
+                console.log("Error fetch categories")
             }
         }
 
