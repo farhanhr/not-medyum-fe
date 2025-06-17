@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import axiosInstance, { setupInterceptor } from "../../../../../../../lib/axios"
 import { Content } from "@/model/Content"
 import { ApiResponse } from "@/model/ApiResponse"
@@ -14,12 +14,13 @@ type Params = {
 }
 
 interface EditContentPageProps {
-    params: Params
+    params: Promise<Params>
 }
 
 const EditContentPage: FC<EditContentPageProps> = ({ params }) => {
     setupInterceptor();
 
+    const resolveParams = React.use(params);
     const [content, setContent] = useState<Content | null>(null)
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -29,7 +30,7 @@ const EditContentPage: FC<EditContentPageProps> = ({ params }) => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await axiosInstance.get<ApiResponse<Content>>(`/admin/categories/${params.id}`);
+                const response = await axiosInstance.get<ApiResponse<Content>>(`/admin/categories/${resolveParams.id}`);
                 setContent(response.data.data);
                 setLoading(false);
             } catch (error: any) {
@@ -49,7 +50,7 @@ const EditContentPage: FC<EditContentPageProps> = ({ params }) => {
         }
         fetchDataCategory();
         fetchData();
-    }, [params.id]);
+    }, [resolveParams]);
 
     if (loading) {
         return <div>Loading...</div>
