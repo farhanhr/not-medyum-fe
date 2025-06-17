@@ -65,7 +65,19 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
         if (categoryList) {
             setCategories(categoryList);
         }
-    }, [categoryList])
+    }, [categoryList]);
+
+    useEffect(() => {
+        if (type == "EDIT" && defaultValues) {
+            setTitle(defaultValues.title);
+            setExerpt(defaultValues.excerpt);
+            setDescription(defaultValues.description);
+            setCategoryId(defaultValues.category_id.toString());
+            setTags(defaultValues.tags.toString());
+            setStatus(defaultValues.status);
+            setPreviewImage(defaultValues.image);
+        }
+    }, [type, defaultValues]);
 
     const handleContent = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -267,7 +279,7 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
                         Image Preview
                     </Label>
                     {previewImage && (
-                        <img src={previewImage} alt="preview-image" className="h-[200px] w-full" />
+                        <img src={previewImage} alt="preview-image" className="h-[200px] " />
                     )}
                 </div>
                 <div className="space-y-2"></div>
