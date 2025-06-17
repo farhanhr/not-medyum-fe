@@ -30,9 +30,8 @@ const EditContentPage: FC<EditContentPageProps> = ({ params }) => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await axiosInstance.get<ApiResponse<Content>>(`/admin/categories/${resolveParams.id}`);
+                const response = await axiosInstance.get<ApiResponse<Content>>(`/admin/contents/${resolveParams.id}`);
                 setContent(response.data.data);
-                setLoading(false);
             } catch (error: any) {
                 setError(error.message || "Error fetching data");
             } finally {
@@ -50,7 +49,7 @@ const EditContentPage: FC<EditContentPageProps> = ({ params }) => {
         }
         fetchDataCategory();
         fetchData();
-    }, [resolveParams]);
+    }, [resolveParams.id]);
 
     if (loading) {
         return <div>Loading...</div>
