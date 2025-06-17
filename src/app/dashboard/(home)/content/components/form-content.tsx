@@ -14,7 +14,7 @@ import { Category } from "@/model/Category";
 import SubmitButtonForm from "./submit-button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { createContent, uploadImage } from "../lib/action";
+import { createContent, editContent, uploadImage } from "../lib/action";
 
 interface FormContentProps {
     type?: "ADD"| "EDIT"
@@ -129,7 +129,37 @@ const FormContentPage: FC<FormContentProps> = ({type, defaultValues, categoryLis
             }
 
             if (defaultValues?.id) {
+                await editContent({
+                    title: title,
+                    excerpt: excerpt,
+                    description: description,
+                    image: imageUrl.data ? imageUrl.data.urlImage : imageUrl,
+                    category_id: Number(categoryId),
+                    tags: tags,
+                    status: status,
+                }, defaultValues.id);
 
+                Swal.fire({
+                    icon: "success",
+                    title: "Succes",
+                    text: "Content has been updated",
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                router.push("/dashboard/content")
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Content ID is not found",
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                router.push("/dashboard/content")
             }
         } catch (error: any) {
             Swal.fire({
