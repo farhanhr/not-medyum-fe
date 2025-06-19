@@ -42,10 +42,10 @@ export default function Navbar() {
                         <Link href={"/"} className="w-28">
                         <Image alt="logo" src={"/img/logo.png"} width={132} height={52} />
                         </Link>
-                        <Link href={"/"} className="px-5 py-2 text-sm font-medium text-gray-600 hover:text-blue-500">Home</Link>
+                        <Link href={"/"} className="px-5 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-500">Home</Link>
                         <MenuList as={"div"} className="relative inline-block text-left">
                             <div>
-                                <MenuButton className="inline-flex w-full justify-center gap-x-1.5 bg-white px-3 py-2 text-sm font-medium text-gray-900 ring-inset ring-gray-300 hover:bg-ray-50">
+                                <MenuButton className="inline-flex w-full justify-center gap-x-1.5 bg-white px-3 py-2 text-sm font-medium text-gray-900 ring-inset ring-gray-300 hover:bg-gray-50 hover:text-blue-500 cursor-pointer">
                                     Categories
                                     <ChevronDownIcon aria-hidden="true" className="-mr-5 size-5 text-gray-400" />
                                 </MenuButton>
