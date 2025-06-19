@@ -16,12 +16,13 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({
+export default function DashboardLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
+            <html lang="en">
             <body className={inter.className}>
                 <section>
                     <nav className="border-b border-muted p-5">
@@ -68,6 +69,7 @@ export default function RootLayout({
                         {children}
                     </section>
                 </section>
-                </body>
+            </body>
+            </html>
     );
 }

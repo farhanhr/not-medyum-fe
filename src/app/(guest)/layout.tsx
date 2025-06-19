@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -24,7 +24,7 @@ export default function RootLayout({
       <body
         className={`antialiased text0=-gray-800 ${inter.variable}`}>
           <Navbar />
-          <main className="container px-8 mx-auto xl:px-5 max-w-screen-lg py-5 lg:py-8">
+        <main className="container px-8 mx-auto xl:px-5 max-w-screen-lg py-5 lg:py-8">
           {children}
           </main>
           <Footer />
