@@ -8,7 +8,8 @@ import Swal from "sweetalert2";
 import Link from "next/link";
 import Image from "next/image";
 import { MenuButton, MenuItem, MenuItems, Menu as MenuList } from "@headlessui/react";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, Menu, X } from "lucide-react";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -68,6 +69,30 @@ export default function Navbar() {
                             </MenuItems>
                         </MenuList>
                     </div>
+                    <div className="flex w-full items-center justify-between md:w-auto">
+                        <Link href={"/"} className="md:hidden w-28">
+                            <Image alt="logo" src={"/img/logo.png"} width={132} height={52} />
+                        </Link>
+
+                        <Button onClick={() => setMenuOpen(!menuOpen)} className="ml-auto rounded-md bg-white px-2 py-1 text-gray-500 focus:bg-transparent focus:text-blue-500 focus:outline-none md:hidden" >
+                            {menuOpen && (
+                                <X />
+                            )}
+
+                            {!menuOpen && (
+                                <Menu color="#949494" />
+                            )}
+                        </Button>
+                    </div>
+                    { menuOpen && (
+                        <div className="order-2 -ml-4 mt-4 flex w-full flex-col items-center justify-start md:hidden">
+                            {categories.map((category) => (
+                                <Link href={`/category/${category.id}`} className="w-full px-5 py-2 text-sm font-medium text-gray-600 hover:text-blue-500">
+                                    {category.title}
+                                </Link>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </nav>
         </div>
