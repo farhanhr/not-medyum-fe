@@ -17,7 +17,7 @@ export default function ContentList() {
 
         const fetchData = async (page: number = 1) => {
             try {
-                const response = await axiosInstance.get<ApiResponse<Content[]>>(`/fe/contents?limit=3&page=${page}`);
+                const response = await axiosInstance.get<ApiResponse<Content[]>>(`/fe/contents?limit=9&page=${page}`);
                 setContents(response.data.data);
                 setPagination(response.data.pagination ?? null);
             } catch (error: any) {
