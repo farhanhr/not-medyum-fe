@@ -83,7 +83,7 @@ export default function Home() {
         {contents.map((content) => (
           <div className="group cursor-pointer" key={content.id}>
             <div className="overflow-hidden rounded-md bg-gray-100 transition-all hover:scale-105">
-              <Link className="relative block aspect-video" href={""}>
+              <Link className="relative block aspect-[5/3]" href={""}>
                 {content.image != "" && (
                   <Image src={content.image} alt={content.title} fill className="object-cover object-center trainsition-all rounded-2xl shadow-2xl" />
                 )}
@@ -124,7 +124,7 @@ export default function Home() {
         ))}
       </div>
       <div className="mt-10 flex justify-center">
-        <Link href={""} className="relative inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white px-3 py-2 pl-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
+        <Link href={"/contents"} className="relative inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white px-3 py-2 pl-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
           <span>
             See All
           </span>

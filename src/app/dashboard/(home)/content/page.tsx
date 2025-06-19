@@ -11,7 +11,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Content } from "@/model/Content";
 import { columns } from "./components/columns-table";
 
-export default function CategoryPage() {
+export default function ContentPage() {
     setupInterceptor();
     const [contents, setContents] = useState<Content[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
