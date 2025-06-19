@@ -6,6 +6,6 @@ export default function SubmitButtonForm() {
     const {pending} = useFormStatus();
 
     return (
-        <Button disabled={pending} className="w-full">Submit</Button>
+        <Button disabled={pending} className="w-full cursor-pointer">Submit</Button>
     )
 }
