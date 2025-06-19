@@ -1,6 +1,5 @@
 "use client"
 
-import { Button } from "@/components/ui/button";
 import { Content } from "@/model/Content";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../lib/axios";
@@ -56,7 +55,7 @@ export default function Home() {
                   </Link>
                 </div>
                 <h2 className="text-lg font-semibold leading-snug tracking-tight mt-2">
-                  <Link href={`/content-all/detail/${content.id}`}>
+                  <Link href={`/contents/detail/${content.id}`}>
                     <span className="bg-gradient-to-r from-green-200 to-green-100 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition  duration-500 hover:bg-[length:100%_3px]">
                       {content.title}
                     </span>
@@ -100,7 +99,7 @@ export default function Home() {
                   </Link>
                 </div>
                 <h2 className="text-lg font-semibold leading-snug tracking-tight mt-2" >
-                  <Link href={`/content-all/detail/${content.id}`}>
+                  <Link href={`/contents/detail/${content.id}`}>
                     <span className="bg-gradient-to-r from-green-200 to-green-100 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition  duration-500 hover:bg-[length:100%_3px]">
                       {content.title}
                     </span>
