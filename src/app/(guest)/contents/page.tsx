@@ -7,6 +7,8 @@ import axiosInstance from "../../../../lib/axios";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function ContentList() {
     const [contents, setContents] = useState<Content[]>([]);
@@ -15,9 +17,9 @@ export default function ContentList() {
 
         const fetchData = async (page: number = 1) => {
             try {
-                const response = await axiosInstance.get<ApiResponse<Content[]>>(`/fe/contents?limit=8&page=${page}`);
+                const response = await axiosInstance.get<ApiResponse<Content[]>>(`/fe/contents?limit=3&page=${page}`);
                 setContents(response.data.data);
-                setContents((prevContents) => prevContents.slice(2));
+                setPagination(response.data.pagination ?? null);
             } catch (error: any) {
                 Swal.fire({
                     icon: "error",
@@ -26,6 +28,18 @@ export default function ContentList() {
                     showConfirmButton: false,
                     timer: 1500
                 });
+            }
+        }
+
+        const handlePrevClick = () => {
+            if (pagination && currentPage > 1) {
+                setCurrentPage(currentPage - 1);
+            }
+        }
+
+        const handleNextClick = () => {
+            if (pagination && currentPage < pagination.total_pages) {
+                setCurrentPage(currentPage + 1);
             }
         }
 
@@ -83,6 +97,28 @@ export default function ContentList() {
                             </div>
                         ))}
                     </div>
+                    {pagination && (
+                        <div className="mt-10 flex items-center justify-center">
+                            <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm">
+                                <Button
+                                onClick={handlePrevClick}
+                                disabled={currentPage === 1}
+                                className="relative inline-flex items-center gap-1 rounded-l-md border border-gray-300 bg-white px-3 py-2 pr-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 cursor-pointer disabled:pointer-events-none disabled:opacity-40">
+                                   <ArrowLeft className="h3 w-3 stroke-1"/>
+                                   <span>Prev</span>
+                                </Button>
+
+                                <Button
+                                onClick={handleNextClick}
+                                disabled={pagination.total_pages <= currentPage}
+                                className="relative inline-flex items-center gap-1 rounded-l-md border border-gray-300 bg-white px-3 py-2 pr-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 cursor-pointer disabled:pointer-events-none disabled:opacity-40">
+                                   <ArrowRight className="h3 w-3 stroke-1"/>
+                                   <span>Next</span>
+                                </Button>
+                            </nav>
+                        </div>
+                    )
+                    }
                 </div>
             </div>
         );
